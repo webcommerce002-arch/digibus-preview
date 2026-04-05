@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digibus — Bleu Institutionnel</title>
+<meta name="description" content="Digibus : ateliers numériques gratuits dans le Pas-de-Calais. Seniors, démarches en ligne, smartphone. Sans jugement, à votre rythme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NGO","name":"Association Digibus","description":"Association d'inclusion numérique itinérante dans le Pas-de-Calais. Ateliers collectifs en camping-car connecté pour seniors, demandeurs d'emploi et personnes en difficulté.","areaServed":"Pas-de-Calais","address":{"@type":"PostalAddress","streetAddress":"59 Boulevard de Paris","addressLocality":"Lillers","postalCode":"62190","addressCountry":"FR"},"email":"digibus.sj@gmail.com","foundingDate":"2023-03-16","sameAs":["https://www.facebook.com/associationdigibus/","https://www.linkedin.com/company/digibus62/"]}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--org:#3B9EFF;--ink:#06111E;--mid:#0a1a2e;--border:#0f2540}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--ink);color:#fff;overflow-x:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:22px 56px;display:flex;align-items:center;justify-content:space-between}
+nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.65) 0%,transparent 100%);pointer-events:none}
+.nav-logo{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.nav-logo img{width:80px;height:80px;border-radius:14px;object-fit:contain;background:#fff;padding:4px;flex-shrink:0}
+.nav-logo span{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.75rem;letter-spacing:-.01em}
+.nav-links{position:relative;z-index:1;display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.6);transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:.82rem;font-weight:600;padding:10px 22px;border-radius:100px;transition:all .25s}
+.nav-cta:hover{background:rgba(255,255,255,.22)}
+
+/* ── HERO ── */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{object-position:center 30%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,.1) 40%,rgba(0,0,0,.72) 100%)}
+.hero-content{position:absolute;bottom:0;left:0;right:0;padding:0 56px 80px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:7px 18px;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px}
+.hero-pill-dot{width:7px;height:7px;background:var(--org);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-h1{font-size:clamp(3.6rem,8.5vw,8.5rem);font-weight:800;line-height:1.05;letter-spacing:-.01em;max-width:1000px;margin-bottom:40px}
+.hero-h1 .muted{font-weight:400;opacity:.6}
+.hero-h1 .accent{color:var(--org)}
+.hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.hero-desc{font-size:.95rem;line-height:1.7;color:rgba(255,255,255,.65);max-width:380px}
+.hero-btns{display:flex;gap:12px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;gap:9px;font-size:.88rem;font-weight:600;padding:15px 26px;border-radius:100px;transition:all .25s;cursor:pointer;border:none}
+.btn-white{background:#fff;color:#0a0a0a}
+.btn-white:hover{background:var(--org);color:#fff;transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.18)}
+.scroll-indicator{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.4);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;animation:float 2.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+.scroll-indicator-line{width:1px;height:32px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.35))}
+
+/* ── STATS ── */
+.stats{background:#0d0d0d;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border)}
+.stat{padding:36px 40px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:8px}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Bricolage Grotesque',sans-serif;font-size:3rem;font-weight:800;letter-spacing:-.015em;line-height:1;color:#fff}
+.stat-n sup{font-size:1.4rem;color:var(--org);font-weight:700;vertical-align:super}
+.stat-l{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.5;max-width:160px}
+
+/* ── BENTO ── */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;background:#0a0a0a;padding:3px}
+.bc{overflow:hidden;border-radius:3px;position:relative}
+.bc-xl   {grid-column:span 5;min-height:500px}
+.bc-text {grid-column:span 4;min-height:244px;background:#141414;display:flex;flex-direction:column;justify-content:center;padding:44px 40px}
+.bc-org  {grid-column:span 3;min-height:244px;background:var(--org);display:flex;flex-direction:column;justify-content:center;padding:40px}
+.bc-img  {grid-column:span 3;min-height:244px}
+.bc-img2 {grid-column:span 4;min-height:244px}
+.bc-stat {grid-column:span 5;min-height:244px;background:#0d0d0d;display:flex;flex-direction:column;justify-content:center;padding:44px 40px;border:1px solid var(--border)}
+.bc img{transition:transform .7s ease}
+.bc:hover img{transform:scale(1.04)}
+.bc-caption{position:absolute;bottom:16px;left:16px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px;color:rgba(255,255,255,.8)}
+.bc-text h2{font-size:clamp(1.4rem,2vw,2rem);font-weight:800;line-height:1.1;margin-bottom:14px}
+.bc-text p{font-size:.85rem;line-height:1.7;color:rgba(255,255,255,.45);margin-bottom:22px}
+.bc-text .tag{display:inline-flex;align-items:center;gap:6px;background:rgba(59,158,255,.12);border:1px solid rgba(59,158,255,.28);color:var(--org);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+.bc-org .on{font-family:'Bricolage Grotesque',sans-serif;font-size:4.5rem;font-weight:800;line-height:1;color:#fff}
+.bc-org .ol{font-size:.82rem;color:rgba(255,255,255,.75);margin-top:6px;line-height:1.4}
+.bc-stat .sn{font-family:'Bricolage Grotesque',sans-serif;font-size:5rem;font-weight:800;letter-spacing:-.015em;line-height:1;color:var(--org)}
+.bc-stat .sl{font-size:.85rem;color:rgba(255,255,255,.4);margin-top:10px;line-height:1.5}
+
+/* ── PARTNERS ── */
+.partners{background:#111;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:44px 56px}
+.partners-label{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.22);text-align:center;padding:28px 0 20px}
+.partners-row{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.partner-card{background:#fff;border-radius:16px;padding:22px 32px;height:114px;min-width:180px;display:flex;align-items:center;justify-content:center;transition:transform .3s,box-shadow .3s}
+.partner-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.partner-card img{height:70px;width:auto;max-width:160px;object-fit:contain;display:block}
+.partner-card.dark{background:#0e2a4a}.partner-card.dark:hover{background:#163a5f}
+
+/* ── SERVICES ── */
+.services{padding:96px 56px;background:#0d0d0d}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.eyebrow::before{content:'';width:18px;height:1px;background:rgba(255,255,255,.2)}
+.srv-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;gap:24px;flex-wrap:wrap}
+.srv-header h2{font-size:clamp(2.2rem,4vw,3.8rem);font-weight:800;letter-spacing:-.015em;line-height:.95}
+.srv-header h2 em{font-style:italic;font-weight:400;color:var(--org)}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.srv-card{position:relative;overflow:hidden;border-radius:3px;aspect-ratio:4/3;cursor:default}
+.srv-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a2535,#0f1820);transition:transform .6s ease}
+.srv-card:hover .srv-bg{transform:scale(1.05)}
+.srv-photo{position:absolute;inset:0;opacity:.35;transition:opacity .5s ease}
+.srv-card:hover .srv-photo{opacity:.85}
+.srv-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.2) 55%,transparent 100%);transition:opacity .5s ease}
+.srv-card:hover .srv-grad{opacity:.55}
+.srv-icon{position:absolute;top:22px;right:22px;width:38px;height:38px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5)}
+.srv-body{position:absolute;bottom:0;left:0;right:0;padding:24px 26px}
+.srv-num{font-size:.65rem;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.35);margin-bottom:8px}
+.srv-title{font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;line-height:1.2;margin-bottom:0}
+.srv-desc{font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.55);max-height:0;overflow:hidden;opacity:0;transition:all .35s;margin-top:0}
+.srv-card:hover .srv-desc{max-height:80px;opacity:1;margin-top:8px}
+.srv-card.orange .srv-bg{background:var(--org)}
+.srv-card.orange .srv-num{color:rgba(255,255,255,.55)}
+.srv-card.orange .srv-desc{color:rgba(255,255,255,.8)}
+
+/* ── PHOTO BREAK ── */
+.photo-break{position:relative;height:55vh;overflow:hidden}
+.photo-break img{object-position:center 40%}
+.photo-break-over{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:0 56px}
+.photo-break-quote{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.8rem,4vw,3.8rem);font-weight:800;text-align:center;max-width:820px;line-height:1.05;letter-spacing:-.01em}
+.photo-break-quote em{font-style:italic;font-weight:400;color:var(--org)}
+.photo-break-attr{font-size:.82rem;font-weight:400;color:rgba(255,255,255,.45);margin-top:16px;text-align:center}
+
+/* ── TESTIMONIALS ── */
+.testimoni{padding:96px 56px;background:var(--ink)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+.tc{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end}
+.tc-bg{position:absolute;inset:0}
+.tc-bg img{filter:grayscale(20%) brightness(.55);transition:filter .5s ease,transform .6s ease}
+.tc:hover .tc-bg img{filter:grayscale(0%) brightness(.95);transform:scale(1.04)}
+.tc-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.25) 50%,rgba(0,0,0,.05) 100%);transition:opacity .5s ease}
+.tc:hover .tc-over{opacity:.6}
+.tc-body{position:relative;z-index:1;padding:28px}
+.tc-stars{color:var(--org);font-size:.9rem;letter-spacing:3px;margin-bottom:14px}
+.tc-q{font-family:'Bricolage Grotesque',sans-serif;font-size:.95rem;font-weight:600;line-height:1.5;font-style:italic;margin-bottom:18px}
+.tc-line{height:1px;background:rgba(255,255,255,.18);margin-bottom:14px}
+.tc-name{font-size:.85rem;font-weight:600}
+.tc-city{font-size:.72rem;color:rgba(255,255,255,.45);margin-top:3px}
+
+/* ── ÉQUIPE ── */
+.equipe{padding:96px 56px;background:var(--ink);border-top:1px solid var(--border)}
+.eq-content{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.eq-text h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:800;letter-spacing:-.01em;line-height:1.05;margin:16px 0 20px}
+.eq-text h2 em{font-style:italic;font-weight:400;color:var(--org)}
+.eq-text p{font-size:.88rem;line-height:1.75;color:rgba(255,255,255,.5);margin-bottom:32px}
+.eq-text p strong{color:rgba(255,255,255,.8);font-weight:600}
+.eq-phones{display:flex;flex-direction:column;gap:12px}
+.eq-phone{display:flex;align-items:center;gap:14px;background:#141414;border:1px solid var(--border);border-radius:12px;padding:14px 20px;color:#fff;transition:border-color .2s}
+.eq-phone:hover{border-color:rgba(59,158,255,.4)}
+.eq-phone i{color:var(--org);flex-shrink:0}
+.eq-phone span{font-size:.82rem;line-height:1.45;color:rgba(255,255,255,.6)}
+.eq-phone span strong{display:block;color:#fff;font-weight:600;font-size:.88rem}
+.eq-photos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.eq-photo-main{grid-column:span 2;border-radius:12px;overflow:hidden;aspect-ratio:16/9;position:relative}
+.eq-photo-side{border-radius:12px;overflow:hidden;aspect-ratio:4/3;position:relative}
+.eq-photos img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.eq-photos div:hover img{transform:scale(1.04)}
+.eq-photo-caption{position:absolute;bottom:0;left:0;right:0;padding:10px 14px;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+/* ── PROCESS ── */
+.process{padding:96px 56px;background:#F7F2EA;border-top:3px solid rgba(59,158,255,.25)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:52px}
+.pc{background:var(--ink);padding:40px 32px;position:relative;overflow:hidden;border-radius:3px}
+.pc::after{content:attr(data-n);position:absolute;top:-12px;right:14px;font-family:'Bricolage Grotesque',sans-serif;font-size:8rem;font-weight:800;color:rgba(255,255,255,.03);line-height:1;pointer-events:none}
+.pc-step{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px}
+.pc-icon{width:42px;height:42px;background:rgba(59,158,255,.1);border:1px solid rgba(59,158,255,.2);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--org);margin-bottom:20px}
+.pc h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:10px;line-height:1.25}
+.pc p{font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.42)}
+
+/* ── CALENDRIER ── */
+.calendar{padding:96px 56px;background:#EDE5D0;border-top:3px solid rgba(59,158,255,.25)}
+.cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:52px}
+.cc{background:#0d0d0d;border:1px solid var(--border);border-radius:12px;padding:28px;transition:border-color .25s,transform .25s}
+.cc:hover{border-color:rgba(59,158,255,.35);transform:translateY(-4px)}
+.cc-date{font-family:'Bricolage Grotesque',sans-serif;font-size:3rem;font-weight:800;letter-spacing:-.015em;color:var(--org);line-height:1}
+.cc-month{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;margin-top:2px}
+.cc-lieu{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.cc-heure{font-size:.78rem;color:rgba(255,255,255,.4)}
+.cc-spots{display:inline-block;margin-top:12px;background:rgba(59,158,255,.12);border:1px solid rgba(59,158,255,.25);color:var(--org);font-size:.68rem;font-weight:600;padding:4px 10px;border-radius:100px}
+.cal-cta{text-align:center;margin-top:40px}
+
+/* ── CTA FINAL ── */
+.cta-final{position:relative;height:65vh;min-height:420px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cta-bg{position:absolute;inset:0}
+.cta-over{position:absolute;inset:0;background:rgba(0,0,0,.62)}
+.cta-body{position:relative;z-index:1;text-align:center;padding:0 56px}
+.cta-body h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2.8rem,7vw,7rem);font-weight:800;letter-spacing:-.02em;line-height:1.0;margin-bottom:24px}
+.cta-body h2 em{font-style:italic;font-weight:400;color:var(--org)}
+.cta-body p{font-size:.95rem;color:rgba(255,255,255,.6);margin-bottom:36px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.65}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+footer{background:#060606;padding:56px 56px 40px;border-top:1px solid var(--border)}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:52px;margin-bottom:40px}
+.ft-logo{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.ft-logo img{width:56px;height:56px;border-radius:10px;object-fit:contain;background:#fff;padding:4px;flex-shrink:0}
+.ft-logo span{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem}
+.ft-desc{font-size:.8rem;line-height:1.7;color:rgba(255,255,255,.3);max-width:260px}
+.ft-col h4{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ft-col ul li a{font-size:.82rem;color:rgba(255,255,255,.4);transition:color .2s}
+.ft-col ul li a:hover{color:#fff}
+.ft-bottom{padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.72rem;color:rgba(255,255,255,.22)}
+
+/* ── SECTIONS CLAIRES (process + calendar) ── */
+.process .eyebrow,.calendar .eyebrow{color:rgba(10,10,10,.35)}
+.process .eyebrow::before,.calendar .eyebrow::before{background:rgba(10,10,10,.2)}
+.process h2,.calendar h2{color:#0a0a0a}
+.process h2 em,.calendar h2 em{color:var(--org)}
+.process .btn-white{background:#0a0a0a;color:#fff}
+.process .btn-white:hover{background:var(--org)}
+/* cards calendrier sur fond beige */
+.calendar .cc{background:#fff;border-color:rgba(10,10,10,.1);box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.calendar .cc:hover{border-color:rgba(59,158,255,.5)}
+.calendar .cc-month{color:rgba(10,10,10,.35)}
+.calendar .cc-lieu{color:#0a0a0a}
+.calendar .cc-heure{color:rgba(10,10,10,.45)}
+.calendar .btn-white{background:#0a0a0a;color:#fff}
+.calendar .btn-white:hover{background:var(--org)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal.d1{transition-delay:.1s}
+.reveal.d2{transition-delay:.2s}
+.reveal.d3{transition-delay:.3s}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  nav{padding:16px 22px}
+  .nav-links{display:none}
+  .hero-content{padding:0 24px 56px}
+  .hero-h1{font-size:3.5rem;letter-spacing:-.01em}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .bento{grid-template-columns:1fr 1fr}
+  .bc-xl,.bc-text,.bc-org,.bc-img,.bc-img2,.bc-stat{grid-column:span 2;min-height:220px}
+  .bc-xl{min-height:300px}
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .cal-grid{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr}
+  .partners{padding:28px 16px}
+  .partners-row{gap:12px}
+  .partner-card{height:80px;min-width:130px;padding:14px 18px}
+  .partner-card img{height:46px}
+  .services,.testimoni,.process,.calendar,.equipe{padding:64px 22px}
+  .eq-content{grid-template-columns:1fr;gap:36px}
+  .eq-photo-main{aspect-ratio:3/2}
+  .photo-break-over{padding:0 24px}
+  .cta-body{padding:0 24px}
+  .footer,.ft-grid{gap:24px}
+  footer{padding:40px 22px 28px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="logo.jpg" alt="Logo Digibus">
+    <span>Digibus</span>
+  </div>
+  <div class="nav-links">
+    <a href="#ateliers">Ateliers</a>
+    <a href="#temoignages">Témoignages</a>
+  </div>
+  <a href="#contact" class="nav-cta">
+    <i data-lucide="mail" style="width:14px;height:14px"></i>
+    Réserver ma place
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="generated/hero-mains.jpg" alt="Atelier numérique Digibus — mains sur clavier" fetchpriority="high">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-pill">
+      <span class="hero-pill-dot"></span>
+      Ateliers &amp; Conseils · 100% gratuits · Pas-de-Calais
+    </div>
+    <h1 class="hero-h1">
+      <span class="muted">L'informatique</span><br>
+      au service<br>
+      <span class="accent">de l'humain.</span>
+    </h1>
+    <div class="hero-row">
+      <p class="hero-desc">Ateliers numériques gratuits dans votre commune. Aucun niveau requis. Groupes de 5 à 10 personnes, à votre rythme.</p>
+      <div class="hero-btns">
+        <a href="#ateliers" class="btn btn-white">
+          <i data-lucide="calendar-days" style="width:16px;height:16px"></i>
+          Voir le calendrier
+        </a>
+        <a href="#ateliers" class="btn btn-ghost">Nos ateliers</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-indicator-line"></div>
+    Défiler
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-n"><span class="counter" data-target="1240">0</span><sup>+</sup></div>
+    <div class="stat-l">Personnes accompagnées depuis le lancement</div>
+  </div>
+  <div class="stat reveal d1">
+    <div class="stat-n"><span class="counter" data-target="48">0</span></div>
+    <div class="stat-l">Communes visitées dans le Pas-de-Calais</div>
+  </div>
+  <div class="stat reveal d2">
+    <div class="stat-n"><span class="counter" data-target="320">0</span><sup>+</sup></div>
+    <div class="stat-l">Ateliers réalisés en deux ans d'activité</div>
+  </div>
+  <div class="stat reveal d3">
+    <div class="stat-n"><span class="counter" data-target="97">0</span><sup>%</sup></div>
+    <div class="stat-l">Des participants déclarent avoir progressé</div>
+  </div>
+</div>
+
+<!-- BENTO PHOTOS -->
+<div class="bento">
+  <div class="bc bc-xl">
+    <img src="photos/fb-10.jpg" alt="Atelier numérique — salle lumineuse vitrée" loading="lazy">
+    <span class="bc-caption">En atelier · Pas-de-Calais</span>
+  </div>
+  <div class="bc bc-text reveal">
+    <span class="tag"><i data-lucide="map-pin" style="width:11px;height:11px"></i> Pas-de-Calais</span>
+    <h2 style="margin-top:18px">Personne ne devrait être exclu du numérique</h2>
+    <p>Digibus se déplace directement dans votre commune. Aucun déplacement pour vous, aucun frais.</p>
+  </div>
+  <div class="bc bc-org reveal d1">
+    <div class="on">100%</div>
+    <div class="ol">Gratuit · Financé par les collectivités</div>
+  </div>
+  <div class="bc bc-img">
+    <img src="photos/fb-12.jpg" alt="Atelier seniors — salle chaleureuse" loading="lazy">
+    <span class="bc-caption">Seniors &amp; adultes</span>
+  </div>
+  <div class="bc bc-img2">
+    <img src="photos/fb-01.jpg" alt="Judith et Stéphanie — fondatrices Digibus" loading="lazy">
+    <span class="bc-caption">L'équipe Digibus</span>
+  </div>
+  <div class="bc bc-stat reveal d2">
+    <div class="sn">5–10</div>
+    <div class="sl">Personnes par atelier<br>pour un accompagnement personnalisé</div>
+  </div>
+</div>
+
+<!-- PARTENAIRES -->
+<div class="partners">
+  <div class="partners-label">Ils nous font confiance · Nos partenaires</div>
+  <div class="partners-row">
+    <div class="partner-card">
+      <img src="logos/france-travail-crop.png" alt="France Travail" loading="lazy">
+    </div>
+    <div class="partner-card">
+      <img src="logos/emmaus-connect-crop.png" alt="Emmaüs Connect" loading="lazy">
+    </div>
+    <div class="partner-card">
+      <img src="logos/unis-cite-crop.png" alt="Unis-Cité" loading="lazy">
+    </div>
+    <div class="partner-card">
+      <img src="logos/simplon-crop.png" alt="Simplon" loading="lazy">
+    </div>
+    <div class="partner-card">
+      <img src="logos/carsat-crop.png" alt="CARSAT Hauts-de-France" loading="lazy">
+    </div>
+    <div class="partner-card">
+      <img src="logos/pasdecalais-crop.png" alt="Pas-de-Calais Mon Département" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="ateliers">
+  <div class="eyebrow">Nos ateliers</div>
+  <div class="srv-header reveal">
+    <h2>Tous types<br>de <em>publics</em></h2>
+    <a href="#contact" class="btn btn-white" style="flex-shrink:0">Je veux participer →</a>
+  </div>
+  <div class="srv-grid">
+    <div class="srv-card">
+      <div class="srv-bg"></div>
+      <div class="srv-photo"><img src="photos/fb-18.jpg" alt="" loading="lazy"></div>
+      <div class="srv-grad"></div>
+      <div class="srv-icon"><i data-lucide="monitor" style="width:17px;height:17px"></i></div>
+      <div class="srv-body">
+        <div class="srv-num">01</div>
+        <div class="srv-title">Accompagnement &amp; Formation</div>
+        <div class="srv-desc">Découverte de l'ordinateur, navigation internet, messagerie. Vous partez de zéro — on s'en occupe.</div>
+      </div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-bg"></div>
+      <div class="srv-photo"><img src="photos/fb-17.jpg" alt="" loading="lazy"></div>
+      <div class="srv-grad"></div>
+      <div class="srv-icon"><i data-lucide="file-text" style="width:17px;height:17px"></i></div>
+      <div class="srv-body">
+        <div class="srv-num">02</div>
+        <div class="srv-title">Démarches administratives</div>
+        <div class="srv-desc">CAF, Ameli, impôts, France Connect. Fini les files d'attente — guidé pas à pas, à votre rythme.</div>
+      </div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-bg"></div>
+      <div class="srv-photo"><img src="photos/fb-20.jpg" alt="" loading="lazy"></div>
+      <div class="srv-grad"></div>
+      <div class="srv-icon"><i data-lucide="wifi" style="width:17px;height:17px"></i></div>
+      <div class="srv-body">
+        <div class="srv-num">03</div>
+        <div class="srv-title">Numérique à domicile</div>
+        <div class="srv-desc">Ateliers individuels et démarches à domicile. Pour ceux qui ne peuvent pas se déplacer facilement.</div>
+      </div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-bg"></div>
+      <div class="srv-photo"><img src="photos/fb-08.jpg" alt="" loading="lazy"></div>
+      <div class="srv-grad"></div>
+      <div class="srv-icon"><i data-lucide="users" style="width:17px;height:17px"></i></div>
+      <div class="srv-body">
+        <div class="srv-num">04</div>
+        <div class="srv-title">Ateliers jeunesse &amp; scolaires</div>
+        <div class="srv-desc">Cyberharcèlement, dangers des réseaux, protection des données. Pour collégiens, lycéens et familles.</div>
+      </div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-bg"></div>
+      <div class="srv-photo"><img src="photos/fb-16.jpg" alt="" loading="lazy"></div>
+      <div class="srv-grad"></div>
+      <div class="srv-icon"><i data-lucide="briefcase" style="width:17px;height:17px"></i></div>
+      <div class="srv-body">
+        <div class="srv-num">05</div>
+        <div class="srv-title">Insertion professionnelle</div>
+        <div class="srv-desc">CV numérique, lettre de motivation, simulation d'entretien, LinkedIn. Pour retrouver l'emploi avec confiance.</div>
+      </div>
+    </div>
+    <div class="srv-card orange">
+      <div class="srv-bg"></div>
+      <div class="srv-grad" style="background:linear-gradient(to top,rgba(180,85,20,.85) 0%,transparent 70%)"></div>
+      <div class="srv-icon" style="background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.3);color:#fff"><i data-lucide="map-pin" style="width:17px;height:17px"></i></div>
+      <div class="srv-body">
+        <div class="srv-num">06</div>
+        <div class="srv-title">Votre commune accueille Digibus</div>
+        <div class="srv-desc">Vous êtes élu(e) ou responsable ? Demandez la venue de Digibus — gratuit, sans engagement.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO BREAK + CITATION -->
+<div class="photo-break">
+  <img src="generated/hero-connexion.jpg" alt="Senior en appel vidéo avec ses petits-enfants" loading="lazy">
+  <div class="photo-break-over">
+    <div>
+      <div class="photo-break-quote reveal">
+        « Je ne savais même pas ce qu'était un email.<br>
+        Aujourd'hui je parle avec mes petits-enfants<br>
+        <em>en vidéo chaque dimanche.</em> »
+      </div>
+      <p class="photo-break-attr reveal d1">— Robert M., 68 ans · Bruay-la-Buissière</p>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimoni" id="temoignages">
+  <div class="eyebrow">Ils témoignent</div>
+  <h2 style="font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.015em" class="reveal">Ce qu'ils en <em style="font-style:italic;font-weight:400;color:var(--org)">disent</em></h2>
+  <div class="testi-grid">
+    <div class="tc reveal">
+      <div class="tc-bg"><img src="photos/fb-09.jpg" alt="" loading="lazy"></div>
+      <div class="tc-over"></div>
+      <div class="tc-body">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">« J'ai pu faire ma déclaration d'impôts toute seule pour la première fois. Je me suis sentie accompagnée, sans jamais être jugée. »</p>
+        <div class="tc-line"></div>
+        <div class="tc-name">Monique R., 73 ans</div>
+        <div class="tc-city">Béthune</div>
+      </div>
+    </div>
+    <div class="tc reveal d1">
+      <div class="tc-bg"><img src="photos/fb-13.jpg" alt="" loading="lazy"></div>
+      <div class="tc-over"></div>
+      <div class="tc-body">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">« Digibus est venu dans notre salle des fêtes. Pas besoin de se déplacer, et c'est entièrement gratuit. Un service précieux pour notre village. »</p>
+        <div class="tc-line"></div>
+        <div class="tc-name">Sylviane D., 61 ans</div>
+        <div class="tc-city">Noeux-les-Mines</div>
+      </div>
+    </div>
+    <div class="tc reveal d2">
+      <div class="tc-bg"><img src="photos/fb-19.jpg" alt="" loading="lazy"></div>
+      <div class="tc-over"></div>
+      <div class="tc-body">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">« Je ne savais pas ce qu'était un email. Aujourd'hui je fais mes courses en ligne et parle avec mes petits-enfants en vidéo chaque semaine. »</p>
+        <div class="tc-line"></div>
+        <div class="tc-name">Robert M., 68 ans</div>
+        <div class="tc-city">Bruay-la-Buissière</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÉQUIPE -->
+<section class="equipe">
+  <div class="eq-content">
+    <div class="eq-text reveal">
+      <div class="eyebrow" style="color:rgba(255,255,255,.3)">L'équipe</div>
+      <h2>Judith &amp; Stéphanie,<br><em>au cœur de l'humain</em></h2>
+      <p>Deux femmes engagées, deux médiatrices numériques et sociales qui ont créé Digibus en mars 2023 avec une conviction : <strong>personne ne devrait être laissé à l'écart du numérique.</strong></p>
+      <div class="eq-phones">
+        <a href="tel:+33620181736" class="eq-phone">
+          <i data-lucide="phone" style="width:14px;height:14px"></i>
+          <span><strong>Stéphanie Matuszak</strong><br>06 20 18 17 36</span>
+        </a>
+        <a href="tel:+33745119002" class="eq-phone">
+          <i data-lucide="phone" style="width:14px;height:14px"></i>
+          <span><strong>Judith Dumay</strong><br>07 45 11 90 02</span>
+        </a>
+      </div>
+    </div>
+    <div class="eq-photos reveal d1">
+      <div class="eq-photo-main">
+        <img src="photos/fb-02.jpg" alt="Judith et Stéphanie en événement" loading="lazy">
+        <div class="eq-photo-caption">Salon de l'inclusion numérique · Pas-de-Calais</div>
+      </div>
+      <div class="eq-photo-side">
+        <img src="photos/fb-04.jpg" alt="Convention Emmaüs Connect · Digibus" loading="lazy">
+        <div class="eq-photo-caption">Convention Emmaüs Connect</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="eyebrow">Comment ça marche</div>
+  <h2 style="font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;letter-spacing:-.015em" class="reveal">4 étapes, <em style="font-style:italic;font-weight:400;color:var(--org)">c'est tout.</em></h2>
+  <div class="proc-grid">
+    <div class="pc reveal" data-n="01">
+      <div class="pc-step">Étape 01</div>
+      <div class="pc-icon"><i data-lucide="phone" style="width:19px;height:19px"></i></div>
+      <h3>Vous nous contactez</h3>
+      <p>Par téléphone, email ou formulaire. Dites-nous votre besoin ou signalez votre commune.</p>
+    </div>
+    <div class="pc reveal d1" data-n="02">
+      <div class="pc-step">Étape 02</div>
+      <div class="pc-icon"><i data-lucide="calendar-check" style="width:19px;height:19px"></i></div>
+      <h3>On organise la venue</h3>
+      <p>Nous planifions la séance avec votre mairie ou structure locale. Tout est pris en charge.</p>
+    </div>
+    <div class="pc reveal d2" data-n="03">
+      <div class="pc-step">Étape 03</div>
+      <div class="pc-icon"><i data-lucide="users" style="width:19px;height:19px"></i></div>
+      <h3>L'atelier a lieu</h3>
+      <p>Groupes de 5 à 10, 2h, formateur dédié. À votre rythme, sans pression, sans jargon.</p>
+    </div>
+    <div class="pc reveal d3" data-n="04">
+      <div class="pc-step">Étape 04</div>
+      <div class="pc-icon"><i data-lucide="trending-up" style="width:19px;height:19px"></i></div>
+      <h3>Vous progressez</h3>
+      <p>Nouvelles compétences, nouvelle autonomie. Des séances de suivi peuvent être organisées.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="contact">
+  <div class="cta-bg"><img src="photos/fb-05.jpg" alt="" loading="lazy"></div>
+  <div class="cta-over"></div>
+  <div class="cta-body reveal">
+    <h2>Digibus arrive<br><em>dans votre commune.</em></h2>
+    <p>Signalez votre commune ou contactez-nous directement. Entièrement gratuit, aucun engagement.</p>
+    <div class="cta-btns">
+      <a href="tel:+33620181736" class="btn btn-white">
+        <i data-lucide="phone" style="width:16px;height:16px"></i>
+        06 20 18 17 36
+      </a>
+      <a href="mailto:digibus.sj@gmail.com" class="btn btn-ghost">
+        <i data-lucide="mail" style="width:16px;height:16px"></i>
+        digibus.sj@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-logo">
+        <img src="logo.jpg" alt="Logo Digibus">
+        <span>Digibus</span>
+      </div>
+      <p class="ft-desc">Association loi 1901 · Inclusion numérique itinérante dans le Pas-de-Calais. Fondée par Judith Dumay &amp; Stéphanie Matuszak. Le numérique qui vient à vous.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Ateliers</h4>
+      <ul>
+        <li><a href="#">Internet & Email</a></li>
+        <li><a href="#">Démarches en ligne</a></li>
+        <li><a href="#">Seniors 60+</a></li>
+        <li><a href="#">Smartphone</a></li>
+        <li><a href="#">Cybersécurité</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+33620181736">Stéphanie — 06 20 18 17 36</a></li>
+        <li><a href="tel:+33745119002">Judith — 07 45 11 90 02</a></li>
+        <li><a href="mailto:digibus.sj@gmail.com">digibus.sj@gmail.com</a></li>
+        <li><a href="https://www.facebook.com/associationdigibus/" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2026 Digibus — Association loi 1901 — Pas-de-Calais (62)</span>
+    <div style="display:flex;gap:20px;flex-wrap:wrap">
+      <a href="mentions-legales.html" style="color:rgba(255,255,255,.22);font-size:.72rem;transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.22)'">Mentions légales</a>
+      <a href="politique-confidentialite.html" style="color:rgba(255,255,255,.22);font-size:.72rem;transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.22)'">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+
+// Reveal
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+}), {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Compteurs
+function count(el, target, duration=1800) {
+  let start = null;
+  const ease = t => 1 - Math.pow(1-t, 3);
+  const step = ts => {
+    if(!start) start = ts;
+    const p = Math.min((ts-start)/duration, 1);
+    el.textContent = Math.floor(ease(p) * target).toLocaleString('fr-FR');
+    if(p < 1) requestAnimationFrame(step);
+    else el.textContent = target.toLocaleString('fr-FR');
+  };
+  requestAnimationFrame(step);
+}
+const co = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ count(e.target, +e.target.dataset.target); co.unobserve(e.target); }
+}), {threshold:.4});
+document.querySelectorAll('.counter').forEach(el => co.observe(el));
+
+// Parallax hero
+window.addEventListener('scroll', () => {
+  const img = document.querySelector('.hero-bg img');
+  if(img) img.style.transform = `translateY(${window.scrollY * .28}px) scale(1.02)`;
+}, {passive:true});
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.background =
+    window.scrollY > 60 ? 'rgba(10,10,10,.92)' : '';
+}, {passive:true});
+</script>
+</body>
+</html>
